@@ -40,6 +40,17 @@ export default {
       // change this to whatever makes sense
       center: { lat: 27.6648, lng: -81.5158 },
       markers: [],
+
+      markerCoordinates: [
+        {
+          latitude: 26.1506566,
+          longitude: -80.1856583
+        },
+        {
+          latitude: 26.042454,
+          longitude: -80.232849
+        }
+      ],
       places: [],
       currentPlace: null,
       map: null,
@@ -106,11 +117,36 @@ export default {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
         };
-        //  this.getSvcInfo();
         this.markers.push({ position: marker });
         this.places.push(this.currentPlace);
         this.center = marker;
         this.currentPlace = null;
+        this.markerCoordinates.forEach(coord => {
+          const marker = {
+            lat: coord.latitude,
+            lng: coord.longitude
+          };
+          this.markers.push({ position: marker });
+          this.places.push(this.currentPlace);
+          this.center = marker;
+          this.currentPlace = null;
+        });
+
+        // this.markerCoordinates.forEach(coord => {
+        //   const position = new google.maps.LatLng(
+        //     coord.latitude,
+        //     coord.longitude
+        //   );
+        //   const marker = new google.maps.Marker({
+        //     position,
+        //     map
+        //   });
+        //   //  this.getSvcInfo();
+        //   this.markers.push({ position: marker });
+        //   this.places.push(this.currentPlace);
+        //   this.center = marker;
+        //   this.currentPlace = null;
+        // });
       }
     },
     geolocate: function() {

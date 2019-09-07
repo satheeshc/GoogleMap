@@ -1,0 +1,55 @@
+{
+  "start": 1,
+  "count": 2,
+  "hasMore": false,
+  "signedMapUrl": "https://maps.googleapis.com/maps/api/staticmap?size=720x450&zoom=18&center=26.1003654,-80.39977479999999&markers=icon:http://webtest.fpl.com/fplcommon/images/fpl-map-marker.png%7C26.1003654,-80.39977479999999&channel=powertracker&client=gme-floridapowerandlight1&style=poi.business%7Cvisibility%3Aon&signature=jXUIybKj8maqHnVxjfLrI8KY7sw=",
+  "data": [
+    {
+      "id": "WGO",
+      "name": "Wingate",
+      "address_line1": "3020 NW 19th Street",
+      "address_city": "Ft. Lauderdale, FL",
+      "address_zip": 33311,
+      "phone1": {
+        "value": "9547172072"
+      },
+      "phone2": {
+        "value": "9547172093"
+      },
+      "email": "Broward-Service-Planning-WGO@FPL.com",
+      "admin_queue": "CBOSVC",
+      "coordinates": {
+        "lat": 26.1506566,
+        "lon": -80.1856583
+      },
+      "mgmt_area": "CB"
+    },
+    {
+      "id": "GSO",
+      "name": "Gulfstream",
+      "address_line1": "4000 Davie Road Extension",
+      "address_city": "Hollywood, FL",
+      "address_zip": 33024,
+      "phone1": {
+        "value": "9544426352"
+      },
+      "phone2": {
+        "value": "9544426350"
+      },
+      "email": "Broward-Service-Planning-GSO@FPL.com",
+      "admin_queue": "SBOSVC",
+      "coordinates": {
+        "lat": 26.042454,
+        "lon": -80.232849
+      },
+      "mgmt_area": "SB"
+    }
+  ],
+  "messages": [
+    {
+      "messageCode": "serviceCenterLookUp",
+      "message": "Service Center retrived successfully",
+      "messageType": "CONFIRMATION"
+    }
+  ]
+}
