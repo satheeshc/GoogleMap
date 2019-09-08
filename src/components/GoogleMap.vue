@@ -74,7 +74,6 @@ export default {
     },
     toggleInfoWindow: function(marker, idx) {
       this.infoWindowPos = marker.position;
-
       this.infoContent = this.getInfoWindowContent(this.serviceCenters[idx]);
 
       //check if its the same marker that was selected if yes toggle
