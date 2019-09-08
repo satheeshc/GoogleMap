@@ -31,6 +31,7 @@
 
 <script>
 import axios from "axios";
+import json from "@/data/svc.json";
 
 export default {
   name: "GoogleMap",
@@ -41,16 +42,7 @@ export default {
       center: { lat: 27.6648, lng: -81.5158 },
       markers: [],
 
-      markerCoordinates: [
-        {
-          latitude: 26.1506566,
-          longitude: -80.1856583
-        },
-        {
-          latitude: 26.042454,
-          longitude: -80.232849
-        }
-      ],
+      serviceCenters: [],
       places: [],
       currentPlace: null,
       map: null,
@@ -82,10 +74,11 @@ export default {
     },
     toggleInfoWindow: function(marker, idx) {
       this.infoWindowPos = marker.position;
-      this.infoContent = this.getInfoWindowContent(marker);
+
+      this.infoContent = this.getInfoWindowContent(this.serviceCenters[idx]);
 
       //check if its the same marker that was selected if yes toggle
-      if (this.currentMidx == idx) {
+      if (this.currentMidx === idx) {
         this.infoWinOpen = !this.infoWinOpen;
       }
       //if different marker set infowindow to open and reset current marker index
@@ -98,17 +91,13 @@ export default {
     getInfoWindowContent: function(marker) {
       return `<div class="card">
         <div class="card-content">
-        <div class="media">
-          <div class="media-content">
-            <p class="title is-4">${marker.name}</p>
-          </div>
-        </div>
-        <div class="content">
-          ${marker.description}
-          <br>
-          <time datetime="2016-1-1">${marker.date_build}</time>
-        </div>
-      </div>
+        <p><b> ${marker.name} Service Center</b><br> </p>
+	      <p class="infwind-addrs"> ${marker.address_line1}  
+			<br> ${marker.address_city}, FL - ${marker.address_zip} 
+			<br> ${marker.phone1.value}<br> ${marker.phone2.value}</p>
+			Open 7:30 AM to 4:30 PM<p></p><br>
+	    <button href='#'>Email Us</button>
+	     </div>
     </div>`;
     },
     addMarker() {
@@ -118,35 +107,20 @@ export default {
           lng: this.currentPlace.geometry.location.lng()
         };
         this.markers.push({ position: marker });
+        console.log(json.data);
+        this.serviceCenters = json.data;
+        this.serviceCenters.forEach(coord => {
+          console.log(coord.coordinates);
+          const marker = {
+            lat: coord.coordinates.lat,
+            lng: coord.coordinates.lon
+          };
+          this.markers.push({ position: marker });
+        });
+
         this.places.push(this.currentPlace);
         this.center = marker;
         this.currentPlace = null;
-        this.markerCoordinates.forEach(coord => {
-          const marker = {
-            lat: coord.latitude,
-            lng: coord.longitude
-          };
-          this.markers.push({ position: marker });
-          this.places.push(this.currentPlace);
-          this.center = marker;
-          this.currentPlace = null;
-        });
-
-        // this.markerCoordinates.forEach(coord => {
-        //   const position = new google.maps.LatLng(
-        //     coord.latitude,
-        //     coord.longitude
-        //   );
-        //   const marker = new google.maps.Marker({
-        //     position,
-        //     map
-        //   });
-        //   //  this.getSvcInfo();
-        //   this.markers.push({ position: marker });
-        //   this.places.push(this.currentPlace);
-        //   this.center = marker;
-        //   this.currentPlace = null;
-        // });
       }
     },
     geolocate: function() {
