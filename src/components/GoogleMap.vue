@@ -4,7 +4,7 @@
       <h2>Search and add a pin</h2>
       <label>
         <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-        <button @click="addMarker">Add</button>
+        &nbsp;<button @click="addMarker">Find Service Center</button>
       </label>
       <br>
     </div>
@@ -71,6 +71,7 @@ export default {
   methods: {
     setPlace(place) {
       this.currentPlace = place;
+      this.markers = [];
     },
     toggleInfoWindow: function(marker, idx) {
       this.infoWindowPos = marker.position;
